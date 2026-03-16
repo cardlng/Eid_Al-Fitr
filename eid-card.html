@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oman LNG Eid Card</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f7f7f7;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      background-color: #006c8c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #card {
+      width: 768px;
+      height: 960px;
+      margin: 30px auto;
+      position: relative;
+      background-image: url('eid-card.png');
+      background-size: cover;
+      background-position: center;
+    }
+    #nameOverlay {
+      position: absolute;
+      top: 345px;
+      width: 100%;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎉 Oman LNG Eid Card Generator</h2>
+  <p>Enter your name below (Arabic or English)</p>
+  <input type="text" id="nameInput" placeholder="Enter your name">
+  <button onclick="generateCard()">Download Card</button>
+
+  <div id="card">
+    <div id="nameOverlay">Your Name</div>
+  </div>
+
+  <script>
+    function generateCard() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (!name) {
+        alert("Please enter a name.");
+        return;
+      }
+
+      document.getElementById("nameOverlay").innerText = name;
+
+      html2canvas(document.getElementById("card")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "EidCard-" + name + ".png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  </script>
+
+</body>
+</html>
